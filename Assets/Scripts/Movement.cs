@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.Space) && hasJumped == false)
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 3f), ForceMode2D.Impulse);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 2.8f), ForceMode2D.Impulse);
             hasJumped = true;
         }
     }
