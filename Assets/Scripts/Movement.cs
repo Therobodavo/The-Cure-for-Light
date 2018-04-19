@@ -36,9 +36,14 @@ public class Movement : MonoBehaviour {
             hasJumped = false;
         }
         */
+        
+    }
+
+    private void FixedUpdate()
+    {
         if (Input.GetKey(KeyCode.D))
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(.5f,0),ForceMode2D.Impulse);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(.5f, 0), ForceMode2D.Impulse);
         }
         if (Input.GetKey(KeyCode.A))
         {
