@@ -41,13 +41,60 @@ public class Movement : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        float dis = .1f;
+        RaycastHit2D topRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y - (transform.localScale.y / 2)), Vector2.right,dis);
+        RaycastHit2D middleRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y), Vector2.right,dis);
+        RaycastHit2D bottomRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y + (transform.localScale.y / 2)), Vector2.right,dis);
+
+        RaycastHit2D topLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y - (transform.localScale.y / 2)), -Vector2.right,dis);
+        RaycastHit2D middleLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y), -Vector2.right,dis);
+        RaycastHit2D bottomLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y + (transform.localScale.y / 2)), -Vector2.right,dis);
+        
+        Vector3 pos = gameObject.transform.position;
+
         if (Input.GetKey(KeyCode.D))
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(.5f, 0), ForceMode2D.Impulse);
+            if(!topRight.collider && !middleRight.collider && !bottomRight.collider) 
+            {
+                gameObject.transform.position = new Vector3(pos.x + .1f, pos.y, pos.z);
+            }
+            else
+            {
+                if(topRight.collider) 
+                {
+                     gameObject.transform.position = new Vector2(topRight.point.x - .01f - (transform.localScale.x / 2), topRight.point.y + (transform.localScale.y / 2));
+                }
+                else if(middleRight.collider) 
+                {
+                     gameObject.transform.position = new Vector2(middleRight.point.x - .01f - (transform.localScale.x / 2), middleRight.point.y);
+                }
+                else
+                {
+                    gameObject.transform.position = new Vector2(bottomRight.point.x - .01f - (transform.localScale.x / 2), bottomRight.point.y - (transform.localScale.y / 2));
+                }
+            }
         }
         if (Input.GetKey(KeyCode.A))
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-.5f, 0), ForceMode2D.Impulse);
+            if(topLeft.collider == null && middleLeft.collider == null && bottomLeft.collider == null) 
+            {
+                gameObject.transform.position = new Vector3(pos.x - .1f, pos.y, pos.z);
+            }
+            else 
+            {
+                if(topLeft.collider) 
+                {
+                     gameObject.transform.position = new Vector2(topLeft.point.x + .01f + (transform.localScale.x / 2), topLeft.point.y + (transform.localScale.y / 2));
+                }
+                else if(middleLeft.collider) 
+                {
+                     gameObject.transform.position = new Vector2(middleLeft.point.x + .01f + (transform.localScale.x / 2), middleLeft.point.y);
+                }
+                else
+                {
+                    gameObject.transform.position = new Vector2(bottomLeft.point.x + .01f + (transform.localScale.x / 2), bottomLeft.point.y - (transform.localScale.y / 2));
+                }
+            }
         }
         if (Input.GetKey(KeyCode.Space) && hasJumped == false)
         {
