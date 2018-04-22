@@ -42,13 +42,14 @@ public class Movement : MonoBehaviour {
     private void FixedUpdate()
     {
         float dis = .1f;
-        RaycastHit2D topRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y - (transform.localScale.y / 2)), Vector2.right,dis);
-        RaycastHit2D middleRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y), Vector2.right,dis);
-        RaycastHit2D bottomRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y + (transform.localScale.y / 2)), Vector2.right,dis);
+        int layer_mask = LayerMask.GetMask("Structure", "Creature");
+        RaycastHit2D topRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y - (transform.localScale.y / 2)), Vector2.right,dis,layer_mask);
+        RaycastHit2D middleRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y), Vector2.right,dis,layer_mask);
+        RaycastHit2D bottomRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) +.01f, transform.position.y + (transform.localScale.y / 2)), Vector2.right,dis,layer_mask);
 
-        RaycastHit2D topLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y - (transform.localScale.y / 2)), -Vector2.right,dis);
-        RaycastHit2D middleLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y), -Vector2.right,dis);
-        RaycastHit2D bottomLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y + (transform.localScale.y / 2)), -Vector2.right,dis);
+        RaycastHit2D topLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y - (transform.localScale.y / 2)), -Vector2.right,dis,layer_mask);
+        RaycastHit2D middleLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y), -Vector2.right,dis,layer_mask);
+        RaycastHit2D bottomLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) -.01f, transform.position.y + (transform.localScale.y / 2)), -Vector2.right,dis,layer_mask);
         
         Vector3 pos = gameObject.transform.position;
 
