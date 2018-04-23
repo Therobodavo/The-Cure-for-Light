@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84bba88951865143844a7fcbfa814f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.03
   player: {fileID: 0}
 --- !u!4 &942955363
 Transform:
@@ -899,52 +900,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &949522212
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 949522213}
-  - component: {fileID: 949522214}
-  m_Layer: 9
-  m_Name: Jumpable
-  m_TagString: JumpCheck
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &949522213
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 949522212}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.97, y: 0.97, z: 0.97}
-  m_Children: []
-  m_Father: {fileID: 2000234460}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &949522214
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 949522212}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
 --- !u!1 &1318110091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +964,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 6c21d4fc5a8c532428f9414fb198b188, type: 3}
   m_Color: {r: 0, g: 1, b: 0.17241383, a: 1}
   m_FlipX: 0
@@ -1027,7 +982,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1318110091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.33, y: 0.63, z: 0}
+  m_LocalPosition: {x: -7.33, y: 0.63, z: -1}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 141368104}
@@ -1737,7 +1692,7 @@ GameObject:
   - component: {fileID: 2000234460}
   - component: {fileID: 2000234461}
   - component: {fileID: 2000234462}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1753,8 +1708,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4067309, y: 0.84084415, z: 1}
-  m_Children:
-  - {fileID: 949522213}
+  m_Children: []
   m_Father: {fileID: 942955363}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1811,7 +1765,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
