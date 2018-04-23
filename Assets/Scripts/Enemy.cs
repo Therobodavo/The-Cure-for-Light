@@ -4,53 +4,82 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //Variables
-    bool isLeft = true;
-    bool isRight = false;
-    
-    
-    GameObject[] turnObjs;
-    List<Collider2D> turnCols = new List<Collider2D>();
-    // Use this for initialization
+    //Sound Bar Variables
+    const float maxScale = .9f;
+    const float maxX = -.45f;
+
+    CircleCollider2D enemyCollider;
+    public GameObject player;
     void Start()
     {
-        //Finding the platforms to check for jumping
-        turnObjs = GameObject.FindGameObjectsWithTag("EnemyTurn");
-        for (int i = 0; i < turnObjs.Length; i++)
+        for(int i = 0; i < gameObject.transform.childCount; i++)
         {
-            turnCols.Add(turnObjs[i].GetComponent<Collider2D>());
+            if(gameObject.transform.GetChild(i).name == "Circle")
+            {
+                enemyCollider = gameObject.transform.GetChild(i).GetComponent<CircleCollider2D>();
+            }
         }
+        player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void Update ()
     {
-        //If the enemy is facing left
-		if(isLeft)
+        for(int i = 0; i < gameObject.transform.childCount; i++)
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-.25f, 0), ForceMode2D.Impulse);
-        }
+            if(gameObject.transform.GetChild(i).name == "Circle")
+            {
+                enemyCollider = gameObject.transform.GetChild(i).GetComponent<CircleCollider2D>();
+                if(enemyCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
+                {
+                    float dis = (player.transform.position - gameObject.transform.position).magnitude;
 
-        //If the enemy is facing right
-        if(isRight)
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(.25f, 0), ForceMode2D.Impulse);
-
+                    //Calculate formula, closer to object = faster increase of sound bar
+                    increaseSound(Mathf.Abs((int)((dis - enemyCollider.radius)* 10)));
+                }
+                break;
+            }
         }
     }
 
-    public void Turn()
+    void increaseSound(int scale)
     {
-        if (isLeft)
-        {
-            isLeft = false;
-            isRight = true;
-        }
-        else if(isRight)
-        {
-            isRight = false;
-            isLeft = true;
-        }
+         for(int i = 0; i < gameObject.transform.childCount; i++)
+         {
+            if(gameObject.transform.GetChild(i).name == "SoundBar")
+            {
+                Vector3 tempPos = gameObject.transform.GetChild(i).GetChild(0).transform.position;
+                Vector3 tempScale = gameObject.transform.GetChild(i).GetChild(0).transform.localScale;
+
+                if((tempPos.x + (.0001f * scale)) <= maxX)
+                {
+                    tempPos.x = maxX;
+                }
+                else if((tempPos.x + (.0001f * scale)) >= 0f)
+                {
+                    tempPos.x = 0f;
+                }
+                else
+                {
+                    tempPos.x += (.0001f * scale);
+                }
+
+                if((tempScale.x + (.0002f * scale)) >= maxScale)
+                {
+                    tempScale.x = maxScale;
+                }
+                else if((tempScale.x + (.0002f * scale)) <= 0)
+                {
+                    tempScale.x = 0;
+                }
+                else
+                {
+                    tempScale.x += (.0002f * scale);
+                }
+                gameObject.transform.GetChild(i).GetChild(0).transform.position = tempPos;
+                gameObject.transform.GetChild(i).GetChild(0).transform.localScale = tempScale;
+                break;
+            }
+         }
     }
 
 }
