@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     //Movement Var
     bool moveLeft = false;
     public float speed;
+    SpriteRenderer renderer;
 
     CircleCollider2D enemyCollider;
     public GameObject player;
@@ -21,6 +22,10 @@ public class Enemy : MonoBehaviour
             if(gameObject.transform.GetChild(i).name == "Circle")
             {
                 enemyCollider = gameObject.transform.GetChild(i).GetComponent<CircleCollider2D>();
+            }
+            if (gameObject.transform.GetChild(i).name == "EnemySprite")
+            {             
+                renderer = gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>();
             }
         }
         player = GameObject.Find("Player");
@@ -49,6 +54,8 @@ public class Enemy : MonoBehaviour
                 {
                     increaseSound(10000);
                 }
+
+           
             }
         }
     }
@@ -130,6 +137,7 @@ public class Enemy : MonoBehaviour
                     gameObject.transform.position = new Vector2(bottomRight.point.x - .01f - (transform.localScale.x / 2), bottomRight.point.y - (transform.localScale.y / 2));
                 }
                 moveLeft = false;
+                renderer.flipX = false;
             }
         }
         if (!moveLeft)
@@ -153,6 +161,8 @@ public class Enemy : MonoBehaviour
                     gameObject.transform.position = new Vector2(bottomLeft.point.x + .01f + (transform.localScale.x / 2), bottomLeft.point.y - (transform.localScale.y / 2));
                 }
                 moveLeft = true;
+                renderer.flipX = true;
+           
             }
         }
     }
