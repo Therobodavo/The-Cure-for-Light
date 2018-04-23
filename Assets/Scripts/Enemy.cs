@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour
     const float maxScale = .9f;
     const float maxX = -.45f;
 
+    //Movement Var
+    bool moveLeft = false;
+    public float speed;
+
     CircleCollider2D enemyCollider;
     public GameObject player;
     void Start()
@@ -37,6 +41,14 @@ public class Enemy : MonoBehaviour
                     increaseSound(Mathf.Abs((int)((dis - enemyCollider.radius)* 10)));
                 }
                 break;
+            }
+            if(gameObject.transform.GetChild(i).name == "EnemySprite")
+            {
+              BoxCollider2D  spriteCollider = gameObject.transform.GetChild(i).GetComponent<BoxCollider2D>();
+                if (spriteCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
+                {
+                    increaseSound(10000);
+                }
             }
         }
     }
@@ -80,6 +92,69 @@ public class Enemy : MonoBehaviour
                 break;
             }
          }
+    }
+
+
+    private void FixedUpdate()
+    {
+        float dis = .1f;
+        int layer_mask = LayerMask.GetMask("Structure");
+        RaycastHit2D topRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) + .01f, transform.position.y - (transform.localScale.y / 2)), Vector2.right, dis, layer_mask);
+        RaycastHit2D middleRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) + .01f, transform.position.y), Vector2.right, dis, layer_mask);
+        RaycastHit2D bottomRight = Physics2D.Raycast(new Vector2(transform.position.x + (transform.localScale.x / 2) + .01f, transform.position.y + (transform.localScale.y / 2)), Vector2.right, dis, layer_mask);
+
+        RaycastHit2D topLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) - .01f, transform.position.y - (transform.localScale.y / 2)), -Vector2.right, dis, layer_mask);
+        RaycastHit2D middleLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) - .01f, transform.position.y), -Vector2.right, dis, layer_mask);
+        RaycastHit2D bottomLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) - .01f, transform.position.y + (transform.localScale.y / 2)), -Vector2.right, dis, layer_mask);
+
+        Vector3 pos = gameObject.transform.position;
+
+        if (moveLeft)
+        {
+            if (!topRight.collider && !middleRight.collider && !bottomRight.collider)
+            {
+                gameObject.transform.position = new Vector3(pos.x + speed, pos.y, pos.z);
+            }
+            else
+            {
+                if (topRight.collider)
+                {
+                    gameObject.transform.position = new Vector2(topRight.point.x - .01f - (transform.localScale.x / 2), topRight.point.y + (transform.localScale.y / 2));
+                }
+                else if (middleRight.collider)
+                {
+                    gameObject.transform.position = new Vector2(middleRight.point.x - .01f - (transform.localScale.x / 2), middleRight.point.y);
+                }
+                else
+                {
+                    gameObject.transform.position = new Vector2(bottomRight.point.x - .01f - (transform.localScale.x / 2), bottomRight.point.y - (transform.localScale.y / 2));
+                }
+                moveLeft = false;
+            }
+        }
+        if (!moveLeft)
+        {
+            if (topLeft.collider == null && middleLeft.collider == null && bottomLeft.collider == null)
+            {
+                gameObject.transform.position = new Vector3(pos.x - speed, pos.y, pos.z);
+            }
+            else
+            {
+                if (topLeft.collider)
+                {
+                    gameObject.transform.position = new Vector2(topLeft.point.x + .01f + (transform.localScale.x / 2), topLeft.point.y + (transform.localScale.y / 2));
+                }
+                else if (middleLeft.collider)
+                {
+                    gameObject.transform.position = new Vector2(middleLeft.point.x + .01f + (transform.localScale.x / 2), middleLeft.point.y);
+                }
+                else
+                {
+                    gameObject.transform.position = new Vector2(bottomLeft.point.x + .01f + (transform.localScale.x / 2), bottomLeft.point.y - (transform.localScale.y / 2));
+                }
+                moveLeft = true;
+            }
+        }
     }
 
 }
