@@ -9,7 +9,8 @@ public class Door : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-		
+
+        doorcol.color = Color.white;
 	}
 	
 	// Update is called once per frame
