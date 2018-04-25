@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
                     float dis = (player.transform.position - gameObject.transform.position).magnitude;
                     Debug.Log("OOOOH YEAH");
                     //Calculate formula, closer to object = faster increase of sound bar
-                    increaseSound(Mathf.Abs((int)((dis - enemyCollider.radius)* 10)));
+                    increaseSound(Mathf.Abs((int)((enemyCollider.radius / dis)* 100)));
                 }
                 break;
             }
