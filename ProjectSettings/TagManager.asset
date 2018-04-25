@@ -6,6 +6,7 @@ TagManager:
   tags:
   - JumpCheck
   - EnemyTurn
+  - Lights
   layers:
   - Default
   - TransparentFX

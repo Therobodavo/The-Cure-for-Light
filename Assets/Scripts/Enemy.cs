@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
                 if(enemyCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
                 {
                     float dis = (player.transform.position - gameObject.transform.position).magnitude;
-
+                    Debug.Log("OOOOH YEAH");
                     //Calculate formula, closer to object = faster increase of sound bar
                     increaseSound(Mathf.Abs((int)((dis - enemyCollider.radius)* 10)));
                 }
