@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    //Sound Bar Variables
-    const float maxScale = .9f;
-    const float maxX = -.45f;
-
     //Movement Var
     bool moveLeft = false;
     public float speed;
@@ -41,9 +38,9 @@ public class Enemy : MonoBehaviour
                 if(enemyCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
                 {
                     float dis = (player.transform.position - gameObject.transform.position).magnitude;
-                    Debug.Log("OOOOH YEAH");
+
                     //Calculate formula, closer to object = faster increase of sound bar
-                    increaseSound(Mathf.Abs((int)((dis - enemyCollider.radius)* 10)));
+                    increaseSound(Mathf.Abs((int)((enemyCollider.radius / dis)* 10)));
                 }
                 break;
             }
@@ -57,48 +54,29 @@ public class Enemy : MonoBehaviour
 
            
             }
+            if(gameObject.transform.GetChild(i).name == "Canvas") 
+            {
+                if(gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value == 0)
+                {
+                    gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.r, gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.g, gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.b, 0);
+                }
+                else if(gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value > 0)
+                {
+                    gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.r, gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.g, gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.b, 255);
+                }
+            }
         }
     }
 
     void increaseSound(int scale)
     {
-         for(int i = 0; i < gameObject.transform.childCount; i++)
-         {
-            if(gameObject.transform.GetChild(i).name == "SoundBar")
+        for(int i = 0; i < gameObject.transform.childCount; i++) 
+        {
+            if(gameObject.transform.GetChild(i).name == "Canvas") 
             {
-                Vector3 tempPos = gameObject.transform.GetChild(i).GetChild(0).transform.position;
-                Vector3 tempScale = gameObject.transform.GetChild(i).GetChild(0).transform.localScale;
-
-                if((tempPos.x + (.0001f * scale)) <= maxX)
-                {
-                    tempPos.x = maxX;
-                }
-                else if((tempPos.x + (.0001f * scale)) >= 0f)
-                {
-                    tempPos.x = 0f;
-                }
-                else
-                {
-                    tempPos.x += (.0001f * scale);
-                }
-
-                if((tempScale.x + (.0002f * scale)) >= maxScale)
-                {
-                    tempScale.x = maxScale;
-                }
-                else if((tempScale.x + (.0002f * scale)) <= 0)
-                {
-                    tempScale.x = 0;
-                }
-                else
-                {
-                    tempScale.x += (.0002f * scale);
-                }
-                gameObject.transform.GetChild(i).GetChild(0).transform.position = tempPos;
-                gameObject.transform.GetChild(i).GetChild(0).transform.localScale = tempScale;
-                break;
+                gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value += scale;
             }
-         }
+        }
     }
 
 
