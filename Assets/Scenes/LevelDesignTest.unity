@@ -6948,12 +6948,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 224007082883609666, guid: cdede55897a53be4590166cd3ed3743e,
+    - target: {fileID: 224203757058723214, guid: cdede55897a53be4590166cd3ed3743e,
         type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224203757058723214, guid: cdede55897a53be4590166cd3ed3743e,
+    - target: {fileID: 224007082883609666, guid: cdede55897a53be4590166cd3ed3743e,
         type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
