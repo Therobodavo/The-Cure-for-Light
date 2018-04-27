@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public bool hasItem = false;
 
+    public Checkpoints currentCheckpoint;
 	// Use this for initialization
 	void Start () 
     {
@@ -15,6 +16,9 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+		if(Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = currentCheckpoint.checkpointPos;
+        }
 	}
 }
