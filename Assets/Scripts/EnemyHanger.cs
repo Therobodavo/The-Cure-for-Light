@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class EnemyHanger : MonoBehaviour
 {
 
+    Animator AnimPlayer;
+    bool rage = false;
     //Sound Bar Variables
     const float maxScale = .9f;
     const float maxX = -.45f;
@@ -34,13 +36,15 @@ public class EnemyHanger : MonoBehaviour
                 renderer = gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>();
             }
         }
+        AnimPlayer = GetComponent<Animator>();
         player = GameObject.Find("Player");
 
     }
 
     void Update()
     {
-      //  shy = false;
+      shy = false;
+
 
       
         for (int i = 0; i < gameObject.transform.childCount; i++)
@@ -83,8 +87,16 @@ public class EnemyHanger : MonoBehaviour
                 }
             }
 
-        }     
-        
+        }
+
+        if (shy)
+        {
+            AnimPlayer.SetBool("Shy", true);
+        }
+        else
+        {
+            AnimPlayer.SetBool("Shy", false);
+        }
     }
 
     void increaseSound(int scale)
@@ -94,6 +106,11 @@ public class EnemyHanger : MonoBehaviour
             if(gameObject.transform.GetChild(i).name == "Canvas") 
             {
                 gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value += scale;
+                if (gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value >= 200)
+                {
+                    AnimPlayer.SetBool("Rage", true);
+                    rage = true;
+                }
             }
         }
     }

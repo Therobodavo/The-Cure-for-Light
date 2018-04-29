@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
+    bool dead = false;
     bool hasJumped = false;
     public Collider2D mainCol;
     //List<Collider2D> jumpCols = new List<Collider2D>();
     GameObject[] jumpColObjs;
     List<Collider2D> jumpCols = new List<Collider2D>();
-	// Use this for initialization
-	void Start ()
+    Animator AnimPlayer;
+    SpriteRenderer renderer;
+   public Light pointLight;
+    bool faceLeft = false;
+    // Use this for initialization
+    void Start ()
     {
+        renderer = GetComponent<SpriteRenderer>();
         //Finding the platforms to check for jumping
         jumpColObjs = GameObject.FindGameObjectsWithTag("JumpCheck");
+        AnimPlayer = GetComponent<Animator>();
         for (int i = 0; i < jumpColObjs.Length; i++)
         {
             jumpCols.Add(jumpColObjs[i].GetComponent<Collider2D>());
@@ -31,12 +38,33 @@ public class Movement : MonoBehaviour {
                 hasJumped = false;
             }
         }
+        MoveLight();
+
+ 
         /*if(gameObject.GetComponent<Rigidbody2D>().IsTouching(mainCol))
         {
             hasJumped = false;
         }
         */
         
+    }
+    public void MoveLight()
+    {
+        Vector3 lightPos = pointLight.transform.position;
+        if (!faceLeft)
+        {
+            lightPos.x = transform.position.x + 0.5f;
+        }
+
+        if (faceLeft)
+        {
+            lightPos.x = transform.position.x - 0.4f;
+        }
+       
+        pointLight.transform.position = lightPos;
+
+    
+
     }
 
     private void FixedUpdate()
@@ -53,8 +81,16 @@ public class Movement : MonoBehaviour {
         
         Vector3 pos = gameObject.transform.position;
 
+        AnimPlayer.SetBool("Move", false);
+
         if (Input.GetKey(KeyCode.D))
         {
+            if (faceLeft)
+            {
+                faceLeft = false;
+                renderer.flipX = false;
+            }
+            AnimPlayer.SetBool("Move",true);
             if(!topRight.collider && !middleRight.collider && !bottomRight.collider) 
             {
                 gameObject.transform.position = new Vector3(pos.x + .1f, pos.y, pos.z);
@@ -77,7 +113,13 @@ public class Movement : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.A))
         {
-            if(topLeft.collider == null && middleLeft.collider == null && bottomLeft.collider == null) 
+            if (!faceLeft)
+            {
+                faceLeft = true;
+                renderer.flipX = true;
+            }
+            AnimPlayer.SetBool("Move", true);
+            if (topLeft.collider == null && middleLeft.collider == null && bottomLeft.collider == null) 
             {
                 gameObject.transform.position = new Vector3(pos.x - .1f, pos.y, pos.z);
             }

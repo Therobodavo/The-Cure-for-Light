@@ -24,10 +24,9 @@ public class RotateLights : MonoBehaviour {
         {
             increase = true;
         }
-        // Smoothly tilts a transform towards a target rotation.
-        float tiltAround = tiltAngle;
+       
 
-        Quaternion target = Quaternion.Euler(tiltAround, 0, 0);
+        Quaternion target = Quaternion.Euler(tiltAngle, 0, 0);
 
         // Dampen towards the target rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);

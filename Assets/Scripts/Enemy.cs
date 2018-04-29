@@ -9,9 +9,11 @@ public class Enemy : MonoBehaviour
     bool moveLeft = false;
     public float speed;
     SpriteRenderer renderer;
-
+    Animator AnimPlayer;
     CircleCollider2D enemyCollider;
     public GameObject player;
+    bool rage = false;
+    float yPos;
     void Start()
     {
         for(int i = 0; i < gameObject.transform.childCount; i++)
@@ -23,8 +25,10 @@ public class Enemy : MonoBehaviour
             if (gameObject.transform.GetChild(i).name == "EnemySprite")
             {             
                 renderer = gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>();
+                AnimPlayer = gameObject.transform.GetChild(i).GetComponent<Animator>();
             }
         }
+     
         player = GameObject.Find("Player");
     }
 
@@ -65,6 +69,11 @@ public class Enemy : MonoBehaviour
                     gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.r, gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.g, gameObject.transform.GetChild(i).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().color.b, 255);
                 }
             }
+
+            if (rage)
+            {
+                transform.position = new Vector3(transform.position.x,yPos,transform.position.z);
+            }
         }
     }
 
@@ -75,6 +84,16 @@ public class Enemy : MonoBehaviour
             if(gameObject.transform.GetChild(i).name == "Canvas") 
             {
                 gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value += scale;
+                if (gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value >= 1000)
+                {
+                    AnimPlayer.SetBool("Rage", true);
+                    if (!rage)
+                    {
+                        yPos = transform.position.y + 0.2f;
+                    }
+              
+                    rage = true;
+                }
             }
         }
     }
@@ -93,56 +112,60 @@ public class Enemy : MonoBehaviour
         RaycastHit2D bottomLeft = Physics2D.Raycast(new Vector2(transform.position.x - (transform.localScale.x / 2) - .01f, transform.position.y + (transform.localScale.y / 2)), -Vector2.right, dis, layer_mask);
 
         Vector3 pos = gameObject.transform.position;
+        if (!rage)
+        {
+            if (moveLeft)
+            {
+                if (!topRight.collider && !middleRight.collider && !bottomRight.collider)
+                {
+                    gameObject.transform.position = new Vector3(pos.x + speed, pos.y, pos.z);
+                }
+                else
+                {
+                    if (topRight.collider)
+                    {
+                        gameObject.transform.position = new Vector2(topRight.point.x - .01f - (transform.localScale.x / 2), topRight.point.y + (transform.localScale.y / 2));
+                    }
+                    else if (middleRight.collider)
+                    {
+                        gameObject.transform.position = new Vector2(middleRight.point.x - .01f - (transform.localScale.x / 2), middleRight.point.y);
+                    }
+                    else
+                    {
+                        gameObject.transform.position = new Vector2(bottomRight.point.x - .01f - (transform.localScale.x / 2), bottomRight.point.y - (transform.localScale.y / 2));
+                    }
+                    moveLeft = false;
+                    renderer.flipX = false;
+                }
+            }
+            if (!moveLeft)
+            {
+                if (topLeft.collider == null && middleLeft.collider == null && bottomLeft.collider == null)
+                {
+                    gameObject.transform.position = new Vector3(pos.x - speed, pos.y, pos.z);
+                }
+                else
+                {
+                    if (topLeft.collider)
+                    {
+                        gameObject.transform.position = new Vector2(topLeft.point.x + .01f + (transform.localScale.x / 2), topLeft.point.y + (transform.localScale.y / 2));
+                    }
+                    else if (middleLeft.collider)
+                    {
+                        gameObject.transform.position = new Vector2(middleLeft.point.x + .01f + (transform.localScale.x / 2), middleLeft.point.y);
+                    }
+                    else
+                    {
+                        gameObject.transform.position = new Vector2(bottomLeft.point.x + .01f + (transform.localScale.x / 2), bottomLeft.point.y - (transform.localScale.y / 2));
+                    }
+                    moveLeft = true;
+                    renderer.flipX = true;
 
-        if (moveLeft)
-        {
-            if (!topRight.collider && !middleRight.collider && !bottomRight.collider)
-            {
-                gameObject.transform.position = new Vector3(pos.x + speed, pos.y, pos.z);
-            }
-            else
-            {
-                if (topRight.collider)
-                {
-                    gameObject.transform.position = new Vector2(topRight.point.x - .01f - (transform.localScale.x / 2), topRight.point.y + (transform.localScale.y / 2));
                 }
-                else if (middleRight.collider)
-                {
-                    gameObject.transform.position = new Vector2(middleRight.point.x - .01f - (transform.localScale.x / 2), middleRight.point.y);
-                }
-                else
-                {
-                    gameObject.transform.position = new Vector2(bottomRight.point.x - .01f - (transform.localScale.x / 2), bottomRight.point.y - (transform.localScale.y / 2));
-                }
-                moveLeft = false;
-                renderer.flipX = false;
             }
         }
-        if (!moveLeft)
-        {
-            if (topLeft.collider == null && middleLeft.collider == null && bottomLeft.collider == null)
-            {
-                gameObject.transform.position = new Vector3(pos.x - speed, pos.y, pos.z);
-            }
-            else
-            {
-                if (topLeft.collider)
-                {
-                    gameObject.transform.position = new Vector2(topLeft.point.x + .01f + (transform.localScale.x / 2), topLeft.point.y + (transform.localScale.y / 2));
-                }
-                else if (middleLeft.collider)
-                {
-                    gameObject.transform.position = new Vector2(middleLeft.point.x + .01f + (transform.localScale.x / 2), middleLeft.point.y);
-                }
-                else
-                {
-                    gameObject.transform.position = new Vector2(bottomLeft.point.x + .01f + (transform.localScale.x / 2), bottomLeft.point.y - (transform.localScale.y / 2));
-                }
-                moveLeft = true;
-                renderer.flipX = true;
-           
-            }
-        }
+
+       
     }
 
 }
