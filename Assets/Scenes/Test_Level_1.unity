@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 69984725}
   - component: {fileID: 69984724}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Cure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,7 +266,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b13f6d91849d1e49b22a22de877a943, type: 2}
+  - {fileID: 2100000, guid: fb2799b5327b36a418cadcfa0f1185f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8034,6 +8034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCol: {fileID: 0}
+  pointLight: {fileID: 0}
 --- !u!212 &1577325730
 SpriteRenderer:
   m_ObjectHideFlags: 0

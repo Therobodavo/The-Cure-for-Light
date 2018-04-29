@@ -64,17 +64,7 @@ public class EnemyHanger : MonoBehaviour
                     increaseSound(100);
                 }
              
-            }
-            if (gameObject.transform.GetChild(i).name == "EnemySprite")
-            {
-                BoxCollider2D spriteCollider = gameObject.transform.GetChild(i).GetComponent<BoxCollider2D>();
-                if (spriteCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
-                {
-                    increaseSound(10000);
-                }
-
-
-            }
+            }       
             if(gameObject.transform.GetChild(i).name == "Canvas") 
             {
                 if(gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value == 0)
