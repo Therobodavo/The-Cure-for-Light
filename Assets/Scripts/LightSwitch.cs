@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightSwitch : MonoBehaviour
 {
-    public Light mainLight;
+    public GameObject mainLight;
     GameObject player;
 
     bool atSwitch = false;
@@ -23,10 +23,10 @@ public class LightSwitch : MonoBehaviour
             //Making sure the player is at the correct position
             if (atSwitch == true)
             {
-                if (mainLight.enabled == false)
+                if (mainLight.active == false)
                 {
                     Debug.Log("Turned the light on");
-                    mainLight.enabled = true;
+                    mainLight.SetActive(true);
                 }
             }
         }
