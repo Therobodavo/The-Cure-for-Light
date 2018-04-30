@@ -54,9 +54,13 @@ public class EnemyHanger : MonoBehaviour
                 enemyCollider = gameObject.transform.GetChild(i).GetComponent<CapsuleCollider2D>();
                 foreach (GameObject light in Lights)
                 {
-                    if (light.GetComponent<CircleCollider2D>().bounds.Intersects(enemyCollider.bounds))
+                    if (light.GetComponent<CircleCollider2D>().bounds.Intersects(enemyCollider.bounds) && light.active == true)
                     {
                         shy = true;
+                    }
+                    else
+                    {
+                        shy = false;
                     }
                 }
                 if (enemyCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds) && !shy)

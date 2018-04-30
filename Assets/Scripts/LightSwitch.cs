@@ -11,6 +11,7 @@ public class LightSwitch : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        mainLight.SetActive(false);
         player = GameObject.Find("Player");
     }
 	
