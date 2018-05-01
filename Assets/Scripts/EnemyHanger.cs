@@ -21,6 +21,10 @@ public class EnemyHanger : MonoBehaviour
     public GameObject player;
 
     public GameObject[] Lights;
+
+   float lastTimeCollided = -1;
+   const float timeDelay = 1.0f;
+
    public bool shy = false;
     void Start()
     {
@@ -66,6 +70,7 @@ public class EnemyHanger : MonoBehaviour
                 if (enemyCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds) && !shy)
                 {
                     increaseSound(100);
+                    lastTimeCollided = Time.fixedTime;
                 }
              
             }       
@@ -91,6 +96,7 @@ public class EnemyHanger : MonoBehaviour
         {
             AnimPlayer.SetBool("Shy", false);
         }
+        checkSound();
     }
 
     void increaseSound(int scale)
@@ -106,6 +112,13 @@ public class EnemyHanger : MonoBehaviour
                     rage = true;
                 }
             }
+        }
+    }
+    void checkSound()
+    {
+        if(Time.fixedTime - lastTimeCollided >= timeDelay)
+        {
+            increaseSound(-20);
         }
     }
 

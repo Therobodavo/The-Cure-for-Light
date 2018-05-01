@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 61672411847479456}
   m_Layer: 0
   m_Name: Watcher
-  m_TagString: Untagged
+  m_TagString: Creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 212003650324972346}
   - component: {fileID: 58688191211466612}
   m_Layer: 0
-  m_Name: 'Circle '
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 114920672244810330}
   - component: {fileID: 114457577831013764}
   m_Layer: 5
-  m_Name: 'Canvas '
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

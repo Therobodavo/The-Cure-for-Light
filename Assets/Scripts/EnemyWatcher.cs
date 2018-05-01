@@ -14,6 +14,10 @@ public class EnemyWatcher : MonoBehaviour {
     public GameObject player;
     bool rage = false;
     float yPos;
+
+    float lastTimeCollided = -1;
+    const float timeDelay = 1.0f;
+
     void Start()
     {
         for (int i = 0; i < gameObject.transform.childCount; i++)
@@ -48,11 +52,11 @@ public class EnemyWatcher : MonoBehaviour {
                 enemyCollider = gameObject.transform.GetChild(i).GetComponent<CircleCollider2D>();
                 if (enemyCollider.bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
                 {
-                    Debug.Log("BLOOP");
                     float dis = (player.transform.position - gameObject.transform.position).magnitude;
 
                     //Calculate formula, closer to object = faster increase of sound bar
-                    increaseSound(Mathf.Abs((int)((enemyCollider.radius / dis) * 10)));
+                    increaseSound(Mathf.Abs((int)((enemyCollider.radius / dis) * 30)));
+                    lastTimeCollided = Time.fixedTime;
                 }
                 
             }
@@ -79,7 +83,10 @@ public class EnemyWatcher : MonoBehaviour {
             {
                 //transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
             }
+
+
         }
+        checkSound();
     }
 
     void increaseSound(int scale)
@@ -100,6 +107,13 @@ public class EnemyWatcher : MonoBehaviour {
                     rage = true;
                 }
             }
+        }
+    }
+    void checkSound()
+    {
+        if(Time.fixedTime - lastTimeCollided >= timeDelay)
+        {
+            increaseSound(-20);
         }
     }
 

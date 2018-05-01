@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour
     public GameObject player;
     bool rage = false;
     float yPos;
+
+    float lastTimeCollided = -1;
+    const float timeDelay = 1.0f;
+
     void Start()
     {
         for(int i = 0; i < gameObject.transform.childCount; i++)
@@ -45,6 +49,8 @@ public class Enemy : MonoBehaviour
 
                     //Calculate formula, closer to object = faster increase of sound bar
                     increaseSound(Mathf.Abs((int)((enemyCollider.radius / dis)* 10)));
+
+                    lastTimeCollided = Time.fixedTime;
                 }
                 break;
             }
@@ -75,6 +81,7 @@ public class Enemy : MonoBehaviour
                 transform.position = new Vector3(transform.position.x,yPos,transform.position.z);
             }
         }
+        checkSound();
     }
 
     void increaseSound(int scale)
@@ -166,6 +173,13 @@ public class Enemy : MonoBehaviour
         }
 
        
+    }
+    void checkSound()
+    {
+        if(Time.fixedTime - lastTimeCollided >= timeDelay)
+        {
+            increaseSound(-20);
+        }
     }
 
 }
