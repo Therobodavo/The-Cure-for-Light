@@ -5,8 +5,7 @@ using UnityEngine;
 //Script for displaying a tutorial message to the player if they walk over a sign
 public class Signs : MonoBehaviour
 {
-    public string info;
-    bool isOn = false;
+    public GameObject canv;
 	// Use this for initialization
 	void Start ()
     {
@@ -21,19 +20,12 @@ public class Signs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        isOn = true;
+        canv.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isOn = false;
+        canv.SetActive(false);
     }
 
-    private void OnGUI()
-    {
-        if(isOn)
-        {
-            GUI.Box(new Rect(0,0, 1000, 100), info);
-        }
-    }
 }
