@@ -12648,6 +12648,25 @@ Prefab:
       propertyPath: mainCol
       value: 
       objectReference: {fileID: 2067317213}
+    - target: {fileID: 61975372167424408, guid: 4931ed60e0035e044aeb1e38a66a16c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212773913222118882, guid: 4931ed60e0035e044aeb1e38a66a16c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95345444948234480, guid: 4931ed60e0035e044aeb1e38a66a16c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392347628252520, guid: 4931ed60e0035e044aeb1e38a66a16c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4931ed60e0035e044aeb1e38a66a16c4, type: 2}
   m_IsPrefabParent: 0

@@ -1,9 +1,18 @@
 fileFormatVersion: 2
-guid: 500d391c20f019646a0ba682f1522d7e
-timeCreated: 1525025191
+guid: e2ae7b824f765f0419a78bfeedec5b6a
+timeCreated: 1525129649
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: LightTiles1_0
+    21300002: LightTiles1_1
+    21300004: LightTiles1_2
+    21300006: LightTiles1_3
+    21300008: LightTiles1_4
+    21300010: LightTiles1_5
+    21300012: LightTiles1_6
+    21300014: LightTiles1_7
+    21300016: LightTiles1_8
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -40,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -65,9 +74,153 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: LightTiles1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 233.33334
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_1
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 233.33334
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_2
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 233.33334
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 117.333336
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_4
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 117.333336
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_5
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 117.333336
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.3333359
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_7
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 1.3333359
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LightTiles1_8
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 1.3333359
+        width: 116.666664
+        height: 116.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
