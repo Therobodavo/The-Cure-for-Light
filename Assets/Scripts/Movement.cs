@@ -72,13 +72,22 @@ public class Movement : MonoBehaviour {
         float dis = .1f;
         int layer_mask = LayerMask.GetMask("Structure", "Creature");
         BoxCollider2D boxie = GetComponent<BoxCollider2D>();
-        RaycastHit2D topRight = Physics2D.Raycast(new Vector2(boxie.transform.position.x + (boxie.transform.localScale.x / 2) +.01f, boxie.transform.position.y - (boxie.transform.localScale.y / 2)), Vector2.right,dis,layer_mask);
-        RaycastHit2D middleRight = Physics2D.Raycast(new Vector2(boxie.transform.position.x + (boxie.transform.localScale.x / 2) +.01f, boxie.transform.position.y), Vector2.right,dis,layer_mask);
-        RaycastHit2D bottomRight = Physics2D.Raycast(new Vector2(boxie.transform.position.x + (boxie.transform.localScale.x / 2) +.01f, boxie.transform.position.y + (boxie.transform.localScale.y / 2)), Vector2.right,dis,layer_mask);
 
-        RaycastHit2D topLeft = Physics2D.Raycast(new Vector2(boxie.transform.position.x - (boxie.transform.localScale.x / 2) -.01f, boxie.transform.position.y - (boxie.transform.localScale.y / 2)), -Vector2.right,dis,layer_mask);
-        RaycastHit2D middleLeft = Physics2D.Raycast(new Vector2(boxie.transform.position.x - (boxie.transform.localScale.x / 2) -.01f, boxie.transform.position.y), -Vector2.right,dis,layer_mask);
-        RaycastHit2D bottomLeft = Physics2D.Raycast(new Vector2(boxie.transform.position.x - (boxie.transform.localScale.x / 2) -.01f, boxie.transform.position.y + (boxie.transform.localScale.y / 2)), -Vector2.right,dis,layer_mask);
+        float xOffset = boxie.offset.x;
+        float yOffset = boxie.offset.y;
+
+        float xSize = boxie.size.x;
+        float ySize = boxie.size.y;
+
+
+
+        RaycastHit2D topRight = Physics2D.Raycast(new Vector2((boxie.transform.position.x + xOffset) + (xSize / 2) +.01f, (boxie.transform.position.y + yOffset) - (ySize / 2)), Vector2.right,dis,layer_mask);
+        RaycastHit2D middleRight = Physics2D.Raycast(new Vector2((boxie.transform.position.x + xOffset) + (xSize / 2) +.01f, (boxie.transform.position.y + yOffset)), Vector2.right,dis,layer_mask);
+        RaycastHit2D bottomRight = Physics2D.Raycast(new Vector2((boxie.transform.position.x + xOffset) + (xSize / 2) +.01f, (boxie.transform.position.y + yOffset) + (ySize / 2)), Vector2.right,dis,layer_mask);
+
+        RaycastHit2D topLeft = Physics2D.Raycast(new Vector2((boxie.transform.position.x + xOffset) - (xSize / 2) -.01f, (boxie.transform.position.y + yOffset) - (ySize / 2)), -Vector2.right,dis,layer_mask);
+        RaycastHit2D middleLeft = Physics2D.Raycast(new Vector2((boxie.transform.position.x + xOffset) - (xSize / 2) -.01f, (boxie.transform.position.y + yOffset)), -Vector2.right,dis,layer_mask);
+        RaycastHit2D bottomLeft = Physics2D.Raycast(new Vector2((boxie.transform.position.x + xOffset) - (xSize / 2) -.01f, (boxie.transform.position.y + yOffset) + (ySize / 2)), -Vector2.right,dis,layer_mask);
         
         Vector3 pos = gameObject.transform.position;
 
@@ -100,15 +109,15 @@ public class Movement : MonoBehaviour {
             {
                 if(topRight.collider) 
                 {
-                     gameObject.transform.position = new Vector2(topRight.point.x - .01f - (boxie.transform.localScale.x / 2), topRight.point.y + (boxie.transform.localScale.y / 2));
+                     gameObject.transform.position = new Vector2((topRight.point.x - xOffset) - .01f - (xSize / 2), (topRight.point.y + yOffset) + (ySize / 2));
                 }
                 else if(middleRight.collider) 
                 {
-                     gameObject.transform.position = new Vector2(middleRight.point.x - .01f - (boxie.transform.localScale.x / 2), middleRight.point.y);
+                     gameObject.transform.position = new Vector2((middleRight.point.x - xOffset) - .01f - (xSize / 2), (middleRight.point.y + yOffset));
                 }
                 else
                 {
-                    gameObject.transform.position = new Vector2(bottomRight.point.x - .01f - (boxie.transform.localScale.x / 2), bottomRight.point.y - (boxie.transform.localScale.y / 2));
+                    gameObject.transform.position = new Vector2((bottomRight.point.x - xOffset) - .01f - (xSize / 2), (bottomRight.point.y + yOffset) - (ySize / 2));
                 }
             }
         }
@@ -128,15 +137,15 @@ public class Movement : MonoBehaviour {
             {
                 if(topLeft.collider) 
                 {
-                     gameObject.transform.position = new Vector2(topLeft.point.x + .01f + (boxie.transform.localScale.x / 2), topLeft.point.y + (boxie.transform.localScale.y / 2));
+                     gameObject.transform.position = new Vector2((topLeft.point.x + xOffset) + .01f + (xSize / 2), (topLeft.point.y + yOffset) + (ySize / 2));
                 }
                 else if(middleLeft.collider) 
                 {
-                     gameObject.transform.position = new Vector2(middleLeft.point.x + .01f + (boxie.transform.localScale.x / 2), middleLeft.point.y);
+                     gameObject.transform.position = new Vector2((middleLeft.point.x + xOffset) + .01f + (xSize / 2), (middleLeft.point.y + yOffset));
                 }
                 else
                 {
-                    gameObject.transform.position = new Vector2(bottomLeft.point.x + .01f + (boxie.transform.localScale.x / 2), bottomLeft.point.y - (boxie.transform.localScale.y / 2));
+                    gameObject.transform.position = new Vector2((bottomLeft.point.x + xOffset) + .01f + (xSize / 2), (bottomLeft.point.y + yOffset) - (ySize / 2));
                 }
             }
         }
