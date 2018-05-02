@@ -154,7 +154,10 @@ public class Movement : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.Space) && hasJumped == false && !pScript.dead)
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 6f), ForceMode2D.Impulse);
+            //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 6f), ForceMode2D.Impulse);
+            Vector2 v = gameObject.GetComponent<Rigidbody2D>().velocity;
+            v.y = 6f;
+            gameObject.GetComponent<Rigidbody2D>().velocity = v;
             hasJumped = true;
         }
     }
