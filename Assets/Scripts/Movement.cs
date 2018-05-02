@@ -112,15 +112,15 @@ public class Movement : MonoBehaviour {
             {
                 if(topRight.collider) 
                 {
-                     gameObject.transform.position = new Vector2((topRight.point.x - xOffset) - .01f - (xSize / 2), (topRight.point.y + yOffset) + (ySize / 2));
+                     gameObject.transform.position = new Vector2((topRight.point.x - xOffset) - .01f - (xSize / 2), gameObject.transform.position.y);
                 }
                 else if(middleRight.collider) 
                 {
-                     gameObject.transform.position = new Vector2((middleRight.point.x - xOffset) - .01f - (xSize / 2), (middleRight.point.y + yOffset));
+                     gameObject.transform.position = new Vector2((middleRight.point.x - xOffset) - .01f - (xSize / 2), gameObject.transform.position.y);
                 }
                 else
                 {
-                    gameObject.transform.position = new Vector2((bottomRight.point.x - xOffset) - .01f - (xSize / 2), (bottomRight.point.y + yOffset) - (ySize / 2));
+                    gameObject.transform.position = new Vector2((bottomRight.point.x - xOffset) - .01f - (xSize / 2), gameObject.transform.position.y);
                 }
             }
         }
@@ -140,15 +140,15 @@ public class Movement : MonoBehaviour {
             {
                 if(topLeft.collider) 
                 {
-                     gameObject.transform.position = new Vector2((topLeft.point.x + xOffset) + .01f + (xSize / 2), (topLeft.point.y + yOffset) + (ySize / 2));
+                     gameObject.transform.position = new Vector2((topLeft.point.x + xOffset) + .01f + (xSize / 2), gameObject.transform.position.y);
                 }
                 else if(middleLeft.collider) 
                 {
-                     gameObject.transform.position = new Vector2((middleLeft.point.x + xOffset) + .01f + (xSize / 2), (middleLeft.point.y + yOffset));
+                     gameObject.transform.position = new Vector2((middleLeft.point.x + xOffset) + .01f + (xSize / 2), gameObject.transform.position.y);
                 }
                 else
                 {
-                    gameObject.transform.position = new Vector2((bottomLeft.point.x + xOffset) + .01f + (xSize / 2), (bottomLeft.point.y + yOffset) - (ySize / 2));
+                    gameObject.transform.position = new Vector2((bottomLeft.point.x + xOffset) + .01f + (xSize / 2), gameObject.transform.position.y);
                 }
             }
         }
