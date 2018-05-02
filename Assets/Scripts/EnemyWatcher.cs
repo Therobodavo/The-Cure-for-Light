@@ -106,10 +106,7 @@ public class EnemyWatcher : MonoBehaviour {
                         rage = true;
                     }
          
-                    if (!pScript.dead)
-                    {
-                        gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value = 0;
-                    }
+                  
 
                  
                 }
