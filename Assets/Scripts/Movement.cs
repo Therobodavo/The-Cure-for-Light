@@ -14,9 +14,11 @@ public class Movement : MonoBehaviour {
     SpriteRenderer renderer;
    public Light pointLight;
     bool faceLeft = false;
+    Player pScript;
     // Use this for initialization
     void Start ()
     {
+        pScript = GetComponent<Player>();
         renderer = GetComponent<SpriteRenderer>();
         //Finding the platforms to check for jumping
         jumpColObjs = GameObject.FindGameObjectsWithTag("JumpCheck");
@@ -93,7 +95,8 @@ public class Movement : MonoBehaviour {
 
         AnimPlayer.SetBool("Move", false);
 
-        if (Input.GetKey(KeyCode.D))
+        
+        if (Input.GetKey(KeyCode.D)&& !pScript.dead)
         {
             if (faceLeft)
             {
@@ -121,7 +124,7 @@ public class Movement : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !pScript.dead)
         {
             if (!faceLeft)
             {
@@ -149,7 +152,7 @@ public class Movement : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKey(KeyCode.Space) && hasJumped == false)
+        if (Input.GetKey(KeyCode.Space) && hasJumped == false && !pScript.dead)
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 6f), ForceMode2D.Impulse);
             hasJumped = true;

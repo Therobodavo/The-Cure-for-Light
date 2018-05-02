@@ -101,7 +101,8 @@ public class EnemyHanger : MonoBehaviour
 
     void increaseSound(int scale)
     {
-        for(int i = 0; i < gameObject.transform.childCount; i++) 
+        Player pScript = player.GetComponent<Player>();
+        for (int i = 0; i < gameObject.transform.childCount; i++) 
         {
             if(gameObject.transform.GetChild(i).name == "Canvas") 
             {
@@ -109,7 +110,19 @@ public class EnemyHanger : MonoBehaviour
                 if (gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value >= 200)
                 {
                     AnimPlayer.SetBool("Rage", true);
-                    rage = true;
+                    if (!rage)
+                    {
+                       
+                        pScript.dead = true;
+                        rage = true;
+                    }
+                 
+                  
+                }
+                else
+                {               
+                    rage = false;
+                    AnimPlayer.SetBool("Rage", false);
                 }
             }
         }

@@ -12,7 +12,7 @@ public class EnemyWatcher : MonoBehaviour {
     Animator AnimPlayer;
     CircleCollider2D enemyCollider;
     public GameObject player;
-    bool rage = false;
+   public bool rage = false;
     float yPos;
 
     float lastTimeCollided = -1;
@@ -91,6 +91,7 @@ public class EnemyWatcher : MonoBehaviour {
 
     void increaseSound(int scale)
     {
+        Player pScript = player.GetComponent<Player>();
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             if (gameObject.transform.GetChild(i).name == "Canvas")
@@ -100,11 +101,22 @@ public class EnemyWatcher : MonoBehaviour {
                 {
                     AnimPlayer.SetBool("Rage", true);
                     if (!rage)
+                    {                      
+                        pScript.dead = true;
+                        rage = true;
+                    }
+         
+                    if (!pScript.dead)
                     {
-                        //yPos = transform.position.y + 0.2f;
+                        gameObject.transform.GetChild(i).GetChild(0).GetComponent<Slider>().value = 0;
                     }
 
-                    rage = true;
+                 
+                }
+                else
+                {
+                    rage = false;
+                    AnimPlayer.SetBool("Rage", false);
                 }
             }
         }

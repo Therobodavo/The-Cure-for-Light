@@ -12,9 +12,10 @@ public class Enemy : MonoBehaviour
     Animator AnimPlayer;
     CircleCollider2D enemyCollider;
     public GameObject player;
-    bool rage = false;
+  public  Player pScript;
+    public   bool rage = false;
     float yPos;
-
+    float yPosStart;
     float lastTimeCollided = -1;
     const float timeDelay = 1.0f;
 
@@ -32,8 +33,9 @@ public class Enemy : MonoBehaviour
                 AnimPlayer = gameObject.transform.GetChild(i).GetComponent<Animator>();
             }
         }
-     
+        yPosStart = transform.position.y;
         player = GameObject.Find("Player");
+      pScript = player.GetComponent<Player>();
     }
 
     void Update ()
@@ -86,7 +88,8 @@ public class Enemy : MonoBehaviour
 
     void increaseSound(int scale)
     {
-        for(int i = 0; i < gameObject.transform.childCount; i++) 
+     
+        for (int i = 0; i < gameObject.transform.childCount; i++) 
         {
             if(gameObject.transform.GetChild(i).name == "Canvas") 
             {
@@ -96,11 +99,21 @@ public class Enemy : MonoBehaviour
                     AnimPlayer.SetBool("Rage", true);
                     if (!rage)
                     {
-                        yPos = transform.position.y + 0.2f;
+                        yPos = transform.position.y + 0.2f;                  
+                        pScript.dead = true;
+                        rage = true;
                     }
-              
-                    rage = true;
+
+                  
+
                 }
+                else
+                {
+                    yPos = yPosStart;
+                      rage = false;
+                    AnimPlayer.SetBool("Rage", false);
+                }
+              
             }
         }
     }
