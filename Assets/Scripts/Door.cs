@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     //public  Material doorcol;
-    public Player play;
+    public GameObject play;
     public string nextLevel;
 	// Use this for initialization
 	void Start ()
     {
-
+        play = GameObject.Find("Player");
         //doorcol.color = Color.white;
 	}
 	
@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(play.hasItem)
+        if(play.GetComponent<Player>().hasItem)
         {
             //doorcol.color = Color.green;
             SceneManager.LoadScene(nextLevel);
