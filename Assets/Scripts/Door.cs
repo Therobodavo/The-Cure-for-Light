@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
-    public  Material doorcol;
+    //public  Material doorcol;
     public Player play;
+    public string nextLevel;
 	// Use this for initialization
 	void Start ()
     {
 
-        doorcol.color = Color.white;
+        //doorcol.color = Color.white;
 	}
 	
 	// Update is called once per frame
@@ -23,13 +25,11 @@ public class Door : MonoBehaviour
     {
         if(play.hasItem)
         {
-            doorcol.color = Color.green;
-            Debug.Log("Good End");
+            //doorcol.color = Color.green;
+            SceneManager.LoadScene(nextLevel);
         }
         else
         {
-            Debug.Log("Bad End");
-            doorcol.color = Color.red;
         }
     }
 }
