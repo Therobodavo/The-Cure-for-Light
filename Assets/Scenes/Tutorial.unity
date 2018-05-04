@@ -269,7 +269,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: This enemy is a hanger. He hears you faster, but he's scared of lights.
-    Use the lightswitch to turn on the light and get past him.
+    Press E to use the lightswitch to turn on the light and get past him.
 --- !u!222 &56149748
 CanvasRenderer:
   m_ObjectHideFlags: 0
